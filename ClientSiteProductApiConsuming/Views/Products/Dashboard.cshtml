@@ -70,9 +70,9 @@
                 </div>
             }
 
-            @if(User.IsInRole("Admin"))
+          @*   @if(User.IsInRole("Admin"))
             {
-                <!-- Product Form -->
+              *@   <!-- Product Form -->
                 <div class="form-section">
                     <h2>@(Model.Product != null ? "Edit Product" : "Add Product")</h2>
                     <form asp-controller="Products" asp-action="@(Model.Product != null ? "UpdateProducts" : "AddProduct")" method="post" enctype="multipart/form-data" id="productForm">
@@ -157,7 +157,7 @@
                     </table>
                 </div>
 
-    }
+  @*   } *@
 
         <!--Product Card-->
         @foreach (var product in Model.Products)

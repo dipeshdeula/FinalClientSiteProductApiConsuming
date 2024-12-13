@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ClientSiteProductApiConsuming.Controllers
 {
-    [Authorize]
+   // [Authorize]
     public class AccountController : Controller
     {
         private readonly IAuthService _authService;
@@ -21,7 +21,7 @@ namespace ClientSiteProductApiConsuming.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> Login(UserLogin loginModel)
         {
             if (ModelState.IsValid)

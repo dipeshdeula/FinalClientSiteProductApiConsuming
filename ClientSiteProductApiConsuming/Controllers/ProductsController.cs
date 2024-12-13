@@ -7,7 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace ClientSiteProductApiConsuming.Controllers
 {
-    [Authorize]
+   // [Authorize]
     public class ProductsController : Controller
     {
         private readonly IProductService _productService;
@@ -26,7 +26,7 @@ namespace ClientSiteProductApiConsuming.Controllers
         }
 
         [HttpGet("Dashboard/{productId?}")]
-        [Authorize(Roles =("Admin"))]
+      //  [Authorize(Roles =("Admin"))]
         public async Task<IActionResult> Dashboard(int? productId = null)
         {
             var token = _httpContextAccessor.HttpContext.Session.GetString("JWToken");
@@ -42,6 +42,7 @@ namespace ClientSiteProductApiConsuming.Controllers
             {
                 // Fetch the specific product for editing
                 selectedProduct = await _productService.GetProductByIdAsync(productId.Value);
+                //selectedProduct = await _productService.GetProductsAsync(x => x.Id.selectedProduct.ProductId == productId.Value).FirstOrDefault();
 
             }
 
@@ -61,16 +62,10 @@ namespace ClientSiteProductApiConsuming.Controllers
 
         [HttpPost("AddProduct")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddProduct(Product product, IFormFile imageFile)
+        public async Task<IActionResult> AddProduct(Product product, IFormFile imageFile,string token)
         {
             _logger.LogInformation("AddProduct method called.");
-            var token = _httpContextAccessor.HttpContext.Session.GetString("JWToken");
-
-            if (string.IsNullOrEmpty(token))
-            {
-                _logger.LogWarning("Token is null or empty. Redirecting to Login");
-                return RedirectToAction("Login", "Account");
-            }
+           
 
             try
             {

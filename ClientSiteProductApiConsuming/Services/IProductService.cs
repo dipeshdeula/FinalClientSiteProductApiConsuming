@@ -11,3 +11,4 @@ namespace ClientSiteProductApiConsuming.Services
         Task <bool> DeleteProductAsync(int id, string token);
     }
 }
+
